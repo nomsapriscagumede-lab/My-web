@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.1">
+<title>MY WEB | Home</title>
+<style>
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: #f5f7fa;
+  color: #333;  
+}
+header {
+  background: #007bff;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 1rem;
+  font-weight: 500;
+}
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Hero */
+.hero {
+  background: linear-gradient(to right, #007bff, #00b4d8);
+  color: white;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+.hero h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.hero p {
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+.hero button {
+  background: white;
+  color: #007bff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 0.5rem;
+}
+.hero button:hover {
+  background: #e0eaff;
+}
+
+/* Features */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 3rem 2rem;
+  max-width: 1000px;
+  margin: auto;
+}
+.feature {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  text-align: center;
+  padding: 2rem 1rem;
+}
+.feature h3 {
+  color: #007bff;
+  margin-bottom: 0.5rem;
+}
+.feature p {
+  color: #555;
+}
+
+/* Footer */
+footer {
+  background: #1e2a38;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>My Web</h1>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#features">About</a>
+    <a href="#contact">Contact</a>
+    <a href="anganathi.html">Member Login</a>
+    <a href="adminaccess.html">Admin</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Welcome to My Web official website 💰</h2>
+  <p>Sponsored by colleague pathway — a trusted  platform offering community growth opportunities.</p>
+  <button onclick="window.location.href='anganathi.html'">join as Member</button>
+  <button onclick="window.location.href='adminaccess.html'">Admin Login</button>
+</section>
+
+<section class="features" id="features">
+  <div class="feature">
+    <h3>📋 about here</h3>
+    <p>coming soon</p>
+  </div>
+  <div class="feature">
+    <h3>featere1</h3>
+    <p>unavailable<strong>...</strong> ....</p>
+  </div>
+  <div class="feature">
+    <h3>📈 feature2</h3>
+    <p>
+      ....f2<br>
+      
+    </p>
+  </div>
+  <div class="feature" id="contact">
+    <h3>📞 Contact Us</h3>
+    <p>
+      +27 76 516 0521<br>
+    </p>
+  </div>
+</section>
+
+<footer>
+  © 2025 My web | Sponsored by colleague pathway
+</footer>
+
+</body>
+</html>
