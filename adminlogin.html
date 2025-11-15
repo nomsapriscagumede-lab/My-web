@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.1">
+  <title>My — Admin Login</title>
+  <style>
+    :root{--bg:#f4f7fb;--card:#fff;--accent:#1366d6;--muted:#6b7280;--black:#000;--radius:12px;--shadow:0 12px 30px rgba(15,23,42,0.06)}
+    *{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;background:linear-gradient(180deg,var(--bg),#eef6fb);display:flex;align-items:center;justify-content:center;padding:28px;color:#0f172a}
+    .card{width:100%;max-width:420px;background:var(--card);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);position:relative}
+    .back-btn{position:absolute;left:16px;top:14px;background:var(--black);color:#fff;border:0;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600}
+    .header{text-align:center;padding-top:12px;padding-bottom:10px}
+    .logo{width:56px;height:56px;border-radius:10px;margin:0 auto 8px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;box-shadow:0 6px 18px rgba(19,102,214,0.12)}
+    h1{margin:6px 0 4px;font-size:20px}.subtitle{margin:0;color:var(--muted);font-size:13px}
+    form{display:flex;flex-direction:column;gap:12px;margin-top:8px}.field{display:flex;flex-direction:column;gap:6px}.label{font-size:13px;color:var(--muted)}
+    input[type="text"],input[type="password"]{width:100%;padding:10px 12px;border:1px solid #e6edf3;border-radius:8px;font-size:15px;background:#fff}
+    .input-with-icon{position:relative}.icon-btn{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:transparent;border:0;padding:6px;cursor:pointer;color:var(--muted);display:flex;align-items:center;justify-content:center;border-radius:6px}
+    .row{display:flex;justify-content:space-between;align-items:center;font-size:13px}.checkbox{display:flex;align-items:center;gap:8px}.link{color:var(--accent);text-decoration:none}
+    .error{color:#d9534f;font-size:13px;display:none}.submit-btn{background:var(--accent);color:#fff;border:0;padding:12px;border-radius:10px;font-weight:700;cursor:pointer;font-size:15px;box-shadow:0 8px 20px rgba(19,102,214,0.12)}
+    .submit-btn:active{transform:translateY(1px)}.foot{text-align:center;color:var(--muted);font-size:12px;margin-top:12px;width: 100%;}
+    .debug{font-family:monospace;font-size:12px;color:#0f172a;background:#eef6fb;padding:8px;border-radius:8px;margin-top:10px;display:none}
+    @media (max-width:480px){.card{padding:18px}.back-btn{left:12px;top:10px;padding:6px 10px}}
+  </style>
+</head>
+<body>
+  <main class="card" role="main" aria-labelledby="title">
+    <button id="backBtn" class="back-btn" aria-label="Go back">← Back</button>
+
+    <header class="header">
+      <div class="logo">A.M</div>
+      <h1 id="title"> — Admin Login</h1>
+      <p class="subtitle">Sign in to manage users and settings</p>
+    </header>
+
+    <form id="loginForm" novalidate autocomplete="off">
+      <label class="field">
+        <span class="label">Username or email</span>
+        <input id="user" name="user" type="text" autocomplete="username" required placeholder="admin">
+      </label>
+
+      <label class="field input-with-icon">
+        <span class="label">Password</span>
+        <input id="pwd" name="password" type="password" autocomplete="current-password" required placeholder="Enter password">
+        <button type="button" class="icon-btn" id="toggle" aria-label="Show password" aria-pressed="false">
+          <svg id="eye" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        </button>
+      </label>
+
+      <div class="row">
+        <label class="checkbox"><input id="remember" type="checkbox"> Remember me</label>
+        <a class="link" href="forgot.html">Forgot?</a>
+      </div>
+
+      <div id="err" class="error" role="alert" aria-live="polite">Invalid username or password. Check for extra spaces or Caps Lock.</div>
+
+      <button class="submit-btn" type="submit">Sign in</button>
+    </form>
+
+    <div id="debug" class="debug" aria-hidden="true"></div>
+
+    <footer class="foot">Siyamthanda • Built 2025</footer>
+  </main>
+
+  <script>
+    (function(){
+      // exact allowed admin credential (as provided)
+      const ADMIN_USER = 'Anganathi@gmail.com';
+      const ADMIN_PASS = 'Anga123';
+
+      // utilities to normalize inputs and strip invisible characters
+      function removeInvisibleChars(s){
+        return (s || '')
+          // common invisible / zero-width / no-break spaces
+          .replace(/\uFEFF/g,'')
+          .replace(/\u00A0/g,' ')
+          .replace(/\u200B/g,'')
+          .replace(/\u200C/g,'')
+          .replace(/\u200D/g,'')
+          .replace(/\u2060/g,'')
+          ;
+      }
+      function normalizeEmail(s){
+        return removeInvisibleChars(s).replace(/\s+/g,' ').trim().toLowerCase();
+      }
+      function normalizePassword(s){
+        // trim common accidental spaces and remove invisible chars
+        return removeInvisibleChars(s).replace(/^[\s]+|[\s]+$/g,'');
+      }
+
+      // debug mode only if ?debug=1 present
+      const debugMode = location.search.indexOf('debug=1') !== -1;
+      const debugEl = document.getElementById('debug');
+      function debugLog(msg){
+        console.log(msg);
+        if (debugMode){
+          debugEl.style.display = 'block';
+          debugEl.textContent += msg + '\n';
+        }
+      }
+
+      const backBtn = document.getElementById('backBtn');
+      const toggle = document.getElementById('toggle');
+      const pwd = document.getElementById('pwd');
+      const form = document.getElementById('loginForm');
+      const err = document.getElementById('err');
+      const userInput = document.getElementById('user');
+
+      backBtn.addEventListener('click', () => {
+        if (history.length > 1) history.back(); else location.href = 'admin.html';
+      });
+
+      toggle.addEventListener('click', () => {
+        const show = pwd.type === 'password';
+        pwd.type = show ? 'text' : 'password';
+        toggle.setAttribute('aria-pressed', String(show));
+        const eye = document.getElementById('eye');
+        eye.innerHTML = show
+          ? '<path d="M2 2l20 20"></path><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a20.4 20.4 0 0 1 5-5.06"></path><path d="M9.53 9.53A3.5 3.5 0 0 0 12 15.5"></path>'
+          : '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>';
+      });
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        err.style.display = 'none';
+        if (!form.checkValidity()){
+          const first = form.querySelector(':invalid'); if (first) first.focus(); return;
+        }
+
+        // normalize inputs
+        const rawUser = userInput.value || '';
+        const rawPass = pwd.value || '';
+
+        const enteredUser = normalizeEmail(rawUser);
+        const enteredPass = normalizePassword(rawPass);
+
+        // debug info (non-sensitive): email entered, lengths, whether exact match
+        debugLog('=== login attempt ===');
+        debugLog('Loaded file: c:\\Users\\slinde.lwa\\OneDrive\\siyamthanda predict.html\\siyanda-mhlongo-website\\src\\scripts\\adminlogin.html');
+        debugLog('enteredUser: "' + enteredUser + '"');
+        debugLog('enteredPass length: ' + (enteredPass ? enteredPass.length : 0));
+        debugLog('adminUser normalized: "' + ADMIN_USER.toLowerCase() + '"');
+        debugLog('adminPass length: ' + ADMIN_PASS.length);
+
+        // perform comparison
+        const emailMatches = enteredUser === ADMIN_USER.toLowerCase();
+        const passMatches = enteredPass === ADMIN_PASS;
+
+        debugLog('emailMatches: ' + emailMatches + ' | passMatches: ' + passMatches);
+
+        if (emailMatches && passMatches){
+          // success
+          window.location.href = './admin.html';
+          return;
+        }
+        else{
+
+        // show helpful error text
+        err.textContent = 'Invalid username or password. Try copying the email into the user field and retype the password (no extra spaces).';
+        err.style.display = 'block';
+        pwd.focus();}
+      });
+
+      // If you still see "invalid":
+      // - open console (F12) and reload with ?debug=1 appended to the URL
+      //   example: file:///C:/.../adminlogin.html?debug=1
+      // - try logging in; debug panel will show normalized email and lengths.
+      // - confirm the page you opened matches the file path logged above.
+    })();
+  </script>
+</body>
+</html>

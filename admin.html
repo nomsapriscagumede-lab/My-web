@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.1">
+<title>Admin Dashboard - </title>
+<style>
+:root {
+  --sidebar-width: 70px;
+  --sidebar-expanded: 240px;
+  --primary: #007bff;
+  --dark-bg: #1e293b;
+  --light-bg: #f5f7fa;
+  --text-color: #333;
+}
+
+/* Base layout */
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: var(--light-bg);
+  color: var(--text-color);
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+  width: var(--sidebar-width);
+  background: #1e2a38;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: width 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+.sidebar:hover {
+  width: var(--sidebar-expanded);
+}
+.sidebar h2 {
+  text-align: center;
+  margin: 1.5rem 0;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.sidebar:hover h2 {
+  opacity: 1;
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar ul li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 0.3rem 0.5rem;
+  transition: background 0.3s;
+}
+.sidebar ul li:hover,
+.sidebar ul li.active {
+  background: var(--primary);
+}
+.sidebar ul li i {
+  font-size: 1.2rem;
+  width: 24px;
+  text-align: center;
+}
+.sidebar ul li span {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+.sidebar:hover ul li span {
+  opacity: 1;
+}
+.sidebar .logout {
+  text-align: center;
+  padding: 1rem 0;
+  border-top: 1px solid #334155;
+  cursor: pointer;
+}
+.sidebar:hover .logout span {
+  opacity: 1;
+}
+
+/* Main */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--light-bg);
+}
+
+/* Topbar */
+.topbar {
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.topbar h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.toggle-mode {
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+/* Content */
+.content {
+  padding: 2rem;
+  overflow-y: auto;
+}
+h2 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+th {
+  background: var(--primary);
+  color: white;
+}
+tr:hover {
+  background: #f1f5f9;
+}
+
+/* Dark mode */
+body.dark {
+  background: var(--dark-bg);
+  color: white;
+}
+body.dark .sidebar {
+  background: #0f172a;
+}
+body.dark .main {
+  background: #1e293b;
+}
+body.dark .topbar {
+  background: #334155;
+  color: white;
+}
+body.dark table {
+  background: #334155;
+  color: white;
+}
+body.dark th {
+  background: var(--primary);
+}
+</style>
+<!-- Icons -->
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div>
+    <h2>Admin</h2>
+    <ul>
+      <li class="active"><i class='bx bxs-dashboard'></i> <span>Dashboard</span></li>
+      <li><a href="#"><i class='bx bxs-user'></i> <span>Members</span></a></li>
+      <li><i class='bx bxs-calendar'></i> <span>Meetings</span></li>
+      <li><i class='bx bxs-report'></i> <span>Reports</span></li>
+      <li><i class='bx bxs-cog'></i> <span>Settings</span></li>
+    </ul>
+  </div>
+  <div class="logout"><i class='bx bx-log-out'></i> <span><a href="adminAccess.html">Logout</span></a></div>
+</div>
+
+<!-- Main -->
+<div class="main">
+  <div class="topbar">
+    <h1>Admin Overview</h1>
+    <button class="toggle-mode" id="toggleMode">🌙 Dark</button>
+  </div>
+
+  <div class="content">
+    <h2>All Members</h2>
+    <table id="membersTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Group</th>
+          <th>Total Members</th>
+          <th>Next Meeting</th>
+          <th>Available Memberes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="5" style="text-align:center;">No members found.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 style="margin-top:2rem;">Details</h2>
+    <table id="contribTable">
+      <thead>
+        <tr>
+          <th>Member</th>
+          <th>Date</th>
+          <th>infot</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="4" style="text-align:center;">No details found.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+// Load data from localStorage
+const members = JSON.parse(localStorage.getItem("allMembers")) |

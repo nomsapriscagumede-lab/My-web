@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="viewport" content="width=device-width, initial-scale=1.1">
+	<title>User Authentication</title>
+	<style>
+container{
+	justify-content: column;
+	align-items: center;
+	background:linear-gradient(to right,blue,dodgerblue,cyan);
+	height: 5rem;
+	border-radius: 50px;
+	margin-top: 3rem;
+
+
+}
+	
+	
+
+
+body{
+	background-image:url('deepwall.WEBP');
+	
+	
+}
+#register-form{
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 22rem;
+	width: 45%;
+	margin-top: 1.5rem;
+	opacity: 70%;
+	margin-left: 30%;
+	border-radius: 20%;
+	text-align: center;
+	background: url('Screenshot 2025-10-31 030933.PNG')-100px;
+	margin-right: -20rem;
+
+}
+#login-form{
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 22rem;
+	width: 45%;
+	margin-top: 1rem;
+	opacity: 70%;
+	margin-left: 30%;
+	border-radius: 20%;
+	background:url('Screenshot 2025-10-31 030933.PNG')-100px;
+text-align: center;
+margin-right: 40rem;}
+#anga{
+    background-image: url('Screenshot 2025-10-31 030933.PNG');
+}
+	
+
+h2{
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+#gogo{
+	margin-top: 1rem;
+	text-align: center;
+	font-size: x-large;
+	font-weight: 500;
+	color:white
+	opacity: 200%;
+	
+}
+#title{
+	margin-top: -1rem;
+}
+#hea{
+	color: white;
+	font-size: smaller;
+	display: flex;
+	text-align: end;
+	justify-content: center;
+	align-items: center;
+	margin-top: -1.7rem;
+	background-color:rgba(0, 0, 0, 0.321);
+	width: 20%;
+	height: 3rem;
+	margin-left:29rem;
+	border-bottom-right-radius: 100rem;
+	border-bottom-left-radius: 100rem;
+
+}
+input{
+	background:linear-gradient(TO right,transparent,black,transparent);
+	color: white;
+	text-align: center;
+	border-radius: 100px;
+	height: 1.5rem;
+	width: 13rem;
+	margin-left: -2rem;
+}
+#username{
+	color: white;
+
+}
+#password{
+	background-color: transparent;
+    color: white;
+}
+#submit{
+	background:linear-gradient(to left,black);
+
+}#submit:hover{
+	transform: scale(1,1.2);
+	rotate: 2deg;
+}
+
+#login-username{
+	background:linear-gradient('to right,transparent,navy,transparent');
+
+}
+#login-username:hover{
+	background-color:black;
+	transform: scale(1,1.2);
+	animation-delay: -60s;
+}
+#username:hover{
+	background-color:black;
+	transform: scale(1,1.2);
+	animation-delay: -60s;
+}
+#login-password:hover{
+	background-color:black;
+	transform: scale(1,1.2);
+	
+}
+#password:hover{
+	background-color:black;
+	transform: scale(1,1.2);
+	
+}
+#login-password{
+	background:linear-gradient('to right,transparent,navy,transparent');
+}
+#login{
+	background-color:black;}
+#login:hover{
+	transform: scale(1,1.2);
+	rotate: 3deg;
+}
+#toggle-form:hover{
+	transform: scale(1,1.2);
+	background:linear-gradient(to right,black);
+}
+#toggle-form{
+	margin-left: 42%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background:linear-gradient(to right,black);
+	height: 1.8rem;
+	border-radius: 100px;
+	color:white;
+	padding: 0.3rem;
+	text-align: center;
+	text-decoration: wavy;
+	opacity: 70%;
+}
+footer{
+color: white;
+align-items: center;
+justify-content: center;
+text-align: center;
+padding: 0.1rem;
+margin-top: 3.4%;
+width: 105%;
+height: 2rem;
+margin-left: -1rem;
+margin-bottom: -1rem;
+background-color:black;
+opacity: 60%;
+}
+#res{
+    background-color: black;
+    border-radius: 100px;
+    color: white;
+}
+#back-btn{
+	width: 6%;
+	height: 2rem;
+	background-color:whitesmoke;
+	color:red;
+	border-radius: 100px;
+	margin-left: -0.7rem;
+	margin-bottom: -15rem;
+	margin-top: -4.5rem;
+	opacity: 500%;
+	text:x-large;
+	border-bottom-right-radius: 100rem;
+}
+	</style>
+</head>
+<body>
+	<header>	
+<button id="back-btn">
+    <a href="home2.html">
+↩ Back
+    </a>
+</button>
+<h1 id="hea">
+		My Web👋🏾
+	</h1></header>
+	<div class="container">
+		<h1 id="inside">
+	<h2 id="title">Register</h2>
+    <div id="anga"></div>
+	<form id="register-form">
+		<br><br><h1><p id="gogo"><small><em>Ensure Your Password <br>is something you will remember</em></small></p>
+		<input type="text" id="username" placeholder="username"><br>
+		<input type="password" id="password" placeholder="password"><br>
+		<input type="submit" id="submit" value="Register">
+		</h1>
+	</form>
+	
+</div>
+	</div>
+</div>
+<div class="container">
+	<h1 id="inside">
+<p>
+	<form id="login-form" style="display: none;">
+		<br><p id="gogo"><small>Enter Your Password to continue<br> if don't remember contact your admin</small></p>
+		<input type="text" id="login-username" placeholder="username"><br>
+		<input type="password" id="login-password" placeholder="password"><br>
+		<input type="submit" id="login" value="Login">
+		
+	</form>
+</p>
+
+</div>
+<button id="toggle-form">Already have an account? Login</button>
+	<button id="res"><div id="result"></div></button>
+
+	<script>
+		let users = JSON.parse(localStorage.getItem('users')) || {};
+
+		document.getElementById('toggle-form').addEventListener('click', toggleForm);
+		document.getElementById('register-form').addEventListener('submit', registerUser);
+		document.getElementById('login-form').addEventListener('submit', loginUser);
+
+		function toggleForm() {
+			const registerForm = document.getElementById('register-form');
+			const loginForm = document.getElementById('login-form');
+			const title = document.getElementById('title');
+
+			if (registerForm.style.display === 'none') {
+				registerForm.style.display = 'block';
+				loginForm.style.display = 'none';
+				title.textContent = 'Register';
+				document.getElementById('toggle-form').textContent = 'Already have an account? Login';
+			} else {
+				registerForm.style.display = 'none';
+				loginForm.style.display = 'block';
+				title.textContent = 'Login';
+				document.getElementById('toggle-form').textContent = 'Don\'t have an account? Register';
+			}
+		}
+
+		function registerUser(e) {
+			e.preventDefault();
+			const username = document.getElementById('username').value;
+			const password = document.getElementById('password').value;
+
+			if (username && password) {
+				if (!users[username]) {
+					users[username] = password;
+					localStorage.setItem('users', JSON.stringify(users));
+					document.getElementById('result').textContent = 'User registered successfully!';
+					document.getElementById('register-form').reset();
+				} else {
+					document.getElementById('result').textContent = 'Username already exists!';
+				}
+			} else {
+				document.getElementById('result').textContent = 'Please fill in both fields!';
+			}
+		}
+
+		function loginUser(e) {
+			e.preventDefault();
+			const username = document.getElementById('login-username').value;
+			const password = document.getElementById('login-password').value;
+
+			if (username && password) {
+				if (users[username] && users[username] === password) {
+					document.getElementById('result').textContent = `Welcome, ${username}!`;
+					document.getElementById('login-form').reset();
+				} else {
+					document.getElementById('result').textContent = 'Invalid username or password!';
+				}
+			} else {
+				document.getElementById('result').textContent = 'Please fill in both fields!';
+			}
+		}
+	</script>
+</body>
+<footer>
+© 2025 My Web | SiyamThanda designed
+</footer>
+</html>

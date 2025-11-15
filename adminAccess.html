@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.1">
+  <title>My Web — Admin Portal</title>
+  <style>
+    :root{
+      --bg:#f3f7fb;
+      --card:url('Screenshot 2025-10-31 030933.PNG')center;
+      --accent:white;
+      --accent-dark:#0660e6;
+      --muted:#6b7280;
+      --shadow:0 10px 30px rgba(15,23,42,0.06);
+      --radius:12px;
+      --gap:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background-image: url('deepwall.WEBP');
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px;
+      color:#0f172a;
+    }
+
+    .card{
+      width:100%;
+      max-width:640px;
+      background:var(--card);
+      border-radius:14px;
+      padding:44px 48px;
+      box-shadow:var(--shadow);
+      text-align:center;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:36px;
+      line-height:1.05;
+      color:var(--accent);
+      font-weight:800;
+      letter-spacing:0.2px;
+    }
+    p.lead{
+      margin:0 0 28px;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .btn{
+      display:inline-block;
+      width:90%;
+      max-width:460px;
+      padding:14px 20px;
+      font-size:17px;
+      font-weight:700;
+      border-radius:10px;
+      border:0;
+      cursor:pointer;
+      margin:0 auto 14px;
+      transition:transform .12s ease, box-shadow .12s ease;
+      box-shadow:0 8px 20px rgba(11,99,255,0.12);
+    }
+
+    .btn.primary{
+      background:linear-gradient(180deg,var(--accent),var(--accent-dark));
+      color:#fff;
+    }
+    .btn.primary:hover{transform:translateY(-3px)}
+    .btn.ghost{
+      background:transparent;
+      color:var(--accent);
+      border:2px solid var(--accent);
+      box-shadow:none;
+    }
+    #back-btn{
+	width: 4rem;
+	height: 2.5rem;
+	background-color:whitesmoke;
+	color:red;
+	border-radius: 100px;
+	margin-left: -16.7rem;
+	margin-bottom:34.5rem;
+	margin-top: -100.5rem;
+	opacity: 500%;
+	text:x-large;
+  text-align: center;
+	border-bottom-right-radius: 100rem;
+}
+    .btn.ghost:hover{background:rgba(11,99,255,0.04);transform:translateY(-2px)}
+
+    .footer{
+      margin-top:22px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    @media (max-width:520px){
+      .card{padding:28px 20px}
+      h1{font-size:28px}
+      .btn{width:100%}
+    }
+  </style>
+</head>
+<body><header>
+  <button id="back-btn">
+    <a href="home2.html">
+↩ Back
+    </a>
+</button>
+</header>
+  <main class="card" role="main" aria-labelledby="welcome">
+    <h1 id="welcome">Welcome to My web</h1>
+    <p class="lead">Please select how you'd like to continue — this is the Admin portal entry page.</p>
+
+    <a href="adminlogin.html"><button class="btn ghost" id="adminBtn" aria-label="Admin login">Admin Login</button></a>
+
+    <div class="footer" aria-hidden="true">Sponsored by colleague pathway | © <span id="year"></span> My Web</div>
+  </main>
+
+  <script>
+    // simple navigation handlers (adjust file names as needed)
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('createBtn').addEventListener('click', () => {
+      window.location.href = 'signup.html';
+    });
+    document.getElementById('adminBtn').addEventListener('click', () => {
+      // admin login page (single-file admin login expected at this path)
+      window.location.href = 'admin-login.html';
+    });
+  </script>
+</body>
+</html>
